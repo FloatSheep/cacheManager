@@ -1,0 +1,17 @@
+{
+  "name": "@floatsheep/cachemanager",
+  "private": false,
+  "version": "1.0.1",
+  "type": "module",
+  "main": "dist/cachemanager.js",
+  "types": "src/main.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.3",
+    "vite": "^5.4.1"
+  }
+}
