@@ -1,7 +1,7 @@
 {
   "name": "@floatsheep/cachemanager",
   "private": false,
-  "version": "1.0.1",
+  "version": "1.0.12",
   "type": "module",
   "main": "dist/cachemanager.js",
   "types": "src/main.ts",

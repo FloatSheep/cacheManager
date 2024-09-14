@@ -65,7 +65,7 @@ class CacheManager {
     });
   }
 
-  getItem<T>(key: string): PromiseUtils<T | null | boolean> {
+  getItem<T>(key: string): PromiseUtils<T | null> {
     return new PromiseUtils(async (resolve, reject) => {
       if (!this.isInitialized) {
         const error = new Error('CacheManager is not initialized. Call init() before using getItem.');
@@ -77,11 +77,11 @@ class CacheManager {
       try {
         const response = await this.cache?.match(key);
         if (!response) {
-          resolve(false);
+          resolve(null);
           return;
         };
 
-        const data = await parseResponse(response);
+        const data = await parseResponse<T>(response);
 
         resolve(data);
       } catch (error) {

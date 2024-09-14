@@ -1,4 +1,6 @@
-export async function parseResponse(response: Response): Promise<any> {
+type ThePromise<T> = Promise<T | any>;
+
+export async function parseResponse<T>(response: Response): ThePromise<T> {
   const contentType = response.headers.get("Content-Type");
   let configType: string;
 
@@ -22,18 +24,18 @@ export async function parseResponse(response: Response): Promise<any> {
 
   switch (configType) {
     case "number":
-      return Number(await response.text());
+      return Number(await response.text()) as T;
     case "json":
-      return response.json();
+      return response.json() as Promise<T>;
     case "arrayBuffer":
-      return response.arrayBuffer();
+      return response.arrayBuffer() as Promise<T>;
     case "blob":
-      return response.blob();
+      return response.blob() as Promise<T>;
     case "text":
-      return response.text();
+      return response.text() as Promise<T>;
     case "boolean":
-      return (await response.text()) === "1";
+      return (await response.text()) === "1" as T;
     default:
-      return response.body;
+      return response.body as T;
   }
 }
