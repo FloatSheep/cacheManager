@@ -230,7 +230,7 @@ npm install @floatsheep/cachemanager
 import { CacheManager } from "@floatsheep/cachemanager";
 ```
 
-### Using in WebScript(inline script and external script)
+### 在 WebScript 中使用
 
 ```html
 <script module>
