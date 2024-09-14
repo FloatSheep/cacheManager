@@ -216,7 +216,7 @@ importScripts(
 #### 在 WebWorker 中以 `import` 使用
 
 > [!WARNING]
-> 这种方法需要依赖 vite(rollover)、webpack 等构建工具，并且它不是 WebWorker 规范的一部分
+> 这种方法需要依赖 vite(rollup)、webpack 等构建工具，并且它不是 WebWorker 规范的一部分
 
 首先安装依赖
 
