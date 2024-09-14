@@ -71,6 +71,24 @@ Why do these problems arise?
 
 The mime-types item in the parameter will be stored in headers, and the data will be processed according to this parameter when reading (i.e., call response.json(), response.text(), etc.) instead of forcing the type conversion.
 
+cacheManager supports type parameters, but note that type assertions or judgments are required to handle null cases
+
+```javascript
+await cacheManager.setItem("foo", "<p>HTML Element</p>", "text/html"); // return true;
+
+const bar = await cacheManager.getItem<string>("foo");
+const element = document.getElementById("app");
+if (element) {
+  element.innerHTML = bar!.split('"').filter(e => e !== "")[0];
+}
+```
+
+When cacheManager does not fetch data, null is returned.
+
+```javascript
+await cacheManager.getItem("foo"); // return null
+```
+
 ### WebWorker
 
 Web Worker can be used in two ways.
@@ -193,6 +211,24 @@ await cacheManager.getItem("foo"); // 返回 '{version: 1}';
 
 mime-types 参数将储存在 header 中，并且根据此参数来处理数据（即调用 response.json()、response.text()等），而不是强制类型转换。
 
+cacheManager 支持类型参数，但要注意的是，需要使用类型断言或判断来处理 null 的情况
+
+```javascript
+await cacheManager.setItem("foo", "<p>HTML Element</p>", "text/html"); // 返回 true;
+
+const bar = await cacheManager.getItem<string>("foo");
+const element = document.getElementById("app");
+if (element) {
+  element.innerHTML = bar!.split('"').filter(e => e !== "")[0];
+}
+```
+
+当 cacheManager 没有获取到数据时，会返回 null
+
+```javascript
+await cacheManager.getItem("foo"); // 返回 null
+```
+
 ### WebWorker
 
 Web Worker 有两种方法使用
@@ -245,6 +281,5 @@ or
   import { CacheManager } from "https://unpkg.com/@floatsheep/cachemanager@latest/dist/cachemanager.umd.cjs"; // 使用 umd（即通用模块规范）
 </script>
 ```
-
 
 [1]: https://github.com/CrazyCreativeDream/CacheDB
