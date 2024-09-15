@@ -1,5 +1,6 @@
 type ThePromise<T> = Promise<T | any>;
 
+// @ts-ignore
 export async function parseResponse<T>(response: Response): ThePromise<T> {
   const contentType = response.headers.get("Content-Type");
   let configType: string;
