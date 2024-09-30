@@ -23,7 +23,7 @@ const cacheManager = new CacheManager({
   broadId: "project1",
 }); // Configuration(optional)
 
-cacheManager.init(); // Initialize(required)
+await cacheManager.init(); // Initialize(required)
 
 await cacheManager.setItem("foo", "bar", "text/plain"); // return true;
 
@@ -95,16 +95,26 @@ Web Worker can be used in two ways.
 
 #### Using in WebWorker with `importScripts`
 
-```javascript
-importScripts("https://unpkg.com/@floatsheep/cachemanager"); // Using default
-```
-
-or
+> [!WARNING]
+> In this method, you can only use the umd module because WebWorker does not support ES6 named imports.
+>
+> Note that, using this method to import JavaScript scripts, you need to ensure that the MIME type is text/javascript, otherwise WebWorker will refuse to import.
 
 ```javascript
 importScripts(
   "https://unpkg.com/@floatsheep/cachemanager@latest/dist/cachemanager.umd.cjs"
-); // Using umd
+);
+
+// use it
+
+const CacheManager = self.cacheManager.CacheManager;
+
+self.addEventListener("fetch", async (event) => {
+  const cacheManager = new CacheManager({});
+  await cacheManager.init();
+  await cacheManager.setItem("AppBlack", "Gold");
+  console.log(await cacheManager.getItem("AppBlack"));
+});
 ```
 
 #### Using in WebWorker with `import`
@@ -132,11 +142,13 @@ import { CacheManager } from "@floatsheep/cachemanager";
 </script>
 ```
 
-or
+If dynamic import is used
 
 ```html
-<script module>
-  import { CacheManager } from "https://unpkg.com/@floatsheep/cachemanager@latest/dist/cachemanager.umd.cjs"; // Using umd
+<script>
+(async() => {
+  const { CacheManager } = await import("https://unpkg.com/@floatsheep/cachemanager");
+})()
 </script>
 ```
 
@@ -163,7 +175,7 @@ const cacheManager = new CacheManager({
   broadId: "project1",
 }); // 配置(可选)
 
-cacheManager.init(); // 初始化(必须，否则报错)
+await cacheManager.init(); // 初始化(必须，否则报错)
 
 await cacheManager.setItem("foo", "bar", "text/plain"); // 返回 true
 
@@ -235,19 +247,27 @@ Web Worker 有两种方法使用
 
 #### 在 WebWorker 中以 `importScripts` 使用
 
-```javascript
-importScripts("https://unpkg.com/@floatsheep/cachemanager"); // 使用默认版
-```
-
-or
+> [!WARNING]
+> 在这种方法中，你只能使用 umd 模块，因为 WebWorker 不支持 ES6 具名导入
+>
+> 需要注意的是，使用此方法导入 JavaScript 脚本时，需要保证 MIME 类型为 text/javascript，否则 WebWorker 将会拒绝导入
 
 ```javascript
 importScripts(
   "https://unpkg.com/@floatsheep/cachemanager@latest/dist/cachemanager.umd.cjs"
 ); // 使用 umd（即通用模块规范）
-```
 
-如果你的项目没有特殊兼容需求，可以使用默认版本，否则请使用 umd 以获取更好的兼容性
+// 使用
+
+const CacheManager = self.cacheManager.CacheManager;
+
+self.addEventListener("fetch", async (event) => {
+  const cacheManager = new CacheManager({});
+  await cacheManager.init();
+  await cacheManager.setItem("AppBlack", "Gold");
+  console.log(await cacheManager.getItem("AppBlack"));
+});
+```
 
 #### 在 WebWorker 中以 `import` 使用
 
@@ -274,11 +294,13 @@ import { CacheManager } from "@floatsheep/cachemanager";
 </script>
 ```
 
-or
+如果使用动态导入
 
 ```html
-<script module>
-  import { CacheManager } from "https://unpkg.com/@floatsheep/cachemanager@latest/dist/cachemanager.umd.cjs"; // 使用 umd（即通用模块规范）
+<script>
+(async() => {
+  const { CacheManager } = await import("https://unpkg.com/@floatsheep/cachemanager");
+})()
 </script>
 ```
 
