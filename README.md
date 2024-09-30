@@ -89,16 +89,16 @@ When cacheManager does not fetch data, null is returned.
 await cacheManager.getItem("foo"); // return null
 ```
 
-### WebWorker
+### Service Worker
 
 Web Worker can be used in two ways.
 
-#### Using in WebWorker with `importScripts`
+#### Using in Service Worker with `importScripts`
 
 > [!WARNING]
-> In this method, you can only use the umd module because WebWorker does not support ES6 named imports.
+> In this method, you can only use the umd module because Service Worker does not support ES6 named imports.
 >
-> Note that, using this method to import JavaScript scripts, you need to ensure that the MIME type is text/javascript, otherwise WebWorker will refuse to import.
+> Note that, using this method to import JavaScript scripts, you need to ensure that the MIME type is text/javascript, otherwise Service Worker will refuse to import.
 
 ```javascript
 importScripts(
@@ -117,10 +117,10 @@ self.addEventListener("fetch", async (event) => {
 });
 ```
 
-#### Using in WebWorker with `import`
+#### Using in Service Worker with `import`
 
 > [!WARNING]
-> This method relies on vite(rollover), webpack, or other build tools and it is not part of the WebWorker standard.
+> This method relies on vite(rollover), webpack, or other build tools and it is not part of the Service Worker standard.
 
 First, install the package.
 
@@ -241,16 +241,16 @@ if (element) {
 await cacheManager.getItem("foo"); // 返回 null
 ```
 
-### WebWorker
+### Service Worker
 
 Web Worker 有两种方法使用
 
-#### 在 WebWorker 中以 `importScripts` 使用
+#### 在 Service Worker 中以 `importScripts` 使用
 
 > [!WARNING]
-> 在这种方法中，你只能使用 umd 模块，因为 WebWorker 不支持 ES6 具名导入
+> 在这种方法中，你只能使用 umd 模块，因为 Service Worker 不支持 ES6 具名导入
 >
-> 需要注意的是，使用此方法导入 JavaScript 脚本时，需要保证 MIME 类型为 text/javascript，否则 WebWorker 将会拒绝导入
+> 需要注意的是，使用此方法导入 JavaScript 脚本时，需要保证 MIME 类型为 text/javascript，否则 Service Worker 将会拒绝导入
 
 ```javascript
 importScripts(
@@ -269,10 +269,10 @@ self.addEventListener("fetch", async (event) => {
 });
 ```
 
-#### 在 WebWorker 中以 `import` 使用
+#### 在 Service Worker 中以 `import` 使用
 
 > [!WARNING]
-> 这种方法需要依赖 vite(rollup)、webpack 等构建工具，并且它不是 WebWorker 规范的一部分
+> 这种方法需要依赖 vite(rollup)、webpack 等构建工具，并且它不是 Service Worker 规范的一部分
 
 首先安装依赖
 
